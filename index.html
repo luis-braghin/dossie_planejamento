@@ -906,31 +906,65 @@
             e.target.value = value;
         });
         
-        // Form Submit
-        document.getElementById('dossierForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const btnText = document.getElementById('btnText');
-            const loader = document.getElementById('loader');
-            const successMessage = document.getElementById('successMessage');
-            
-            // Show loading
-            btnText.style.display = 'none';
-            loader.style.display = 'block';
-            
-            // Simulate API call
-            setTimeout(() => {
-                loader.style.display = 'none';
-                successMessage.style.display = 'block';
-                
-                // Reset form
-                setTimeout(() => {
-                    btnText.style.display = 'inline';
-                    successMessage.style.display = 'none';
-                    document.getElementById('dossierForm').reset();
-                }, 5000);
-            }, 2000);
+       // Form Submit
+document.getElementById('dossierForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    // COLOQUE SUA URL DO WEBHOOK AQUI ↓↓↓
+    const WEBHOOK_URL = 'https://planejamentocomercialtvx.app.n8n.cloud/webhook-test/cnpj-dossie';
+    
+    const btnText = document.getElementById('btnText');
+    const loader = document.getElementById('loader');
+    const successMessage = document.getElementById('successMessage');
+    const errorMessage = document.getElementById('errorMessage'); // Adicione um elemento de erro se quiser
+    
+    // Pega os valores do formulário
+    const cnpj = document.getElementById('cnpj').value;
+    const email = document.getElementById('email').value;
+    
+    // Show loading
+    btnText.style.display = 'none';
+    loader.style.display = 'block';
+    
+    try {
+        // Envia dados para o webhook
+        const response = await fetch(WEBHOOK_URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                CNPJ: cnpj,
+                Email: email,
+                timestamp: new Date().toISOString(),
+                origem: 'website'
+            })
         });
+        
+        if (response.ok) {
+            // Sucesso
+            loader.style.display = 'none';
+            successMessage.style.display = 'block';
+            
+            // Reset form após 5 segundos
+            setTimeout(() => {
+                btnText.style.display = 'inline';
+                successMessage.style.display = 'none';
+                document.getElementById('dossierForm').reset();
+            }, 5000);
+        } else {
+            // Erro
+            throw new Error('Erro ao processar solicitação');
+        }
+    } catch (error) {
+        console.error('Erro:', error);
+        loader.style.display = 'none';
+        btnText.style.display = 'inline';
+        
+        // Mostra mensagem de erro (opcional)
+        alert('Ocorreu um erro ao processar sua solicitação. Por favor, tente novamente.');
+    }
+});
         
         // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -979,3 +1013,4 @@
     </script>
 </body>
 </html>
+
