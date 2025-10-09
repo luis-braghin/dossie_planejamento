@@ -1,129 +1,981 @@
-<!doctype html>
-<html lang="pt-br">
+<!DOCTYPE html>
+<html lang="pt-BR">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Dossiê de Planejamento — Solicitação</title>
-  <meta name="description" content="Formulário para solicitar o Dossiê de Planejamento Comercial.">
-  <style>
-    :root {
-      --bg: #f5f7fb;
-      --card: #ffffff;
-      --brand: #0B72E7;
-      --text: #0f172a;
-      --muted: #64748b;
-      --ok: #16a34a;
-      --error: #dc2626;
-      --radius: 14px;
-    }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0; background: var(--bg); color: var(--text);
-      font: 16px/1.5 system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
-    }
-    .wrap { max-width: 780px; margin: 32px auto; padding: 0 16px; }
-    .card {
-      background: var(--card); border-radius: var(--radius);
-      box-shadow: 0 12px 32px rgba(5, 28, 44, 0.10);
-      overflow: hidden;
-    }
-    header {
-      background: #051C2C; padding: 24px 28px; border-bottom: 4px solid var(--brand);
-      display: flex; align-items: center; gap: 16px;
-    }
-    header img { height: 36px; width: auto; display: block; }
-    header h1 { margin: 0; color: #fff; font-size: 18px; font-weight: 600; letter-spacing: .2px; }
-    .body { padding: 28px; }
-    .lead { color: var(--muted); margin: 4px 0 20px; }
-    form { display: grid; gap: 16px; }
-    label { display: block; font-weight: 600; margin-bottom: 6px; }
-    .hint { font-size: 12.5px; color: var(--muted); margin-top: 4px; }
-    input[type="text"], input[type="email"] {
-      width: 100%; padding: 12px 14px; border: 1px solid #e5e7eb; border-radius: 10px; outline: none;
-      transition: border-color .15s ease, box-shadow .15s ease; background: #fff;
-    }
-    input[type="text"]:focus, input[type="email"]:focus {
-      border-color: var(--brand); box-shadow: 0 0 0 4px rgba(11,114,231,.12);
-    }
-    .actions { display: flex; gap: 12px; align-items: center; margin-top: 6px; }
-    .btn {
-      appearance: none; border: 0; border-radius: 999px; padding: 12px 18px; cursor: pointer;
-      background: var(--brand); color: #fff; font-weight: 600; letter-spacing: .2px;
-      display: inline-flex; align-items: center; gap: 8px;
-    }
-    .btn:disabled { opacity: .7; cursor: not-allowed; }
-    .disclaimer { font-size: 12px; color: var(--muted); margin-top: 12px; }
-    footer { padding: 16px 28px 24px; color: var(--muted); font-size: 12.5px; border-top: 1px solid #eef2f7; background: #fafbff; }
-    /* honeypot fica invisível para humanos */
-    .hp { position: absolute; left: -9999px; top: -9999px; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Dossiê de Planejamento - Análise completa e inteligente de empresas através do CNPJ">
+    <meta name="keywords" content="dossiê empresarial, análise CNPJ, planejamento comercial, due diligence, verificação empresarial">
+    <title>Dossiê de Planejamento | Análise Completa de CNPJ</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1e40af;
+            --secondary: #0891b2;
+            --accent: #7c3aed;
+            --dark: #0f172a;
+            --gray: #64748b;
+            --light: #f8fafc;
+            --success: #22c55e;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-secondary: linear-gradient(135deg, #2563eb 0%, #0891b2 100%);
+            --gradient-dark: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            overflow-x: hidden;
+            background: var(--light);
+        }
+        
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            opacity: 0.03;
+        }
+        
+        .bg-animation::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(123, 58, 237, 0.1) 0%, transparent 70%);
+            animation: rotate 30s linear infinite;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Navigation */
+        nav {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: var(--gradient-secondary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .logo i {
+            font-size: 1.8rem;
+            color: var(--primary);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: var(--gray);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 120px 2rem 80px;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%239C92AC" fill-opacity="0.03"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');
+        }
+        
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-content h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: white;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            animation: slideInLeft 1s ease;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f472b6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .hero-content p {
+            font-size: 1.25rem;
+            color: #cbd5e1;
+            margin-bottom: 2rem;
+            animation: slideInLeft 1s ease 0.2s both;
+        }
+        
+        .hero-badges {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            animation: slideInLeft 1s ease 0.4s both;
+        }
+        
+        .badge {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            color: white;
+            font-size: 0.875rem;
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .badge i {
+            color: var(--success);
+        }
+        
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        /* Form Card */
+        .form-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+            animation: slideInRight 1s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .form-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-secondary);
+        }
+        
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .form-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--gray);
+            font-weight: 500;
+            font-size: 0.875rem;
+        }
+        
+        .input-wrapper {
+            position: relative;
+        }
+        
+        .input-wrapper i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray);
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 0.875rem 1rem 0.875rem 2.75rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: #f8fafc;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: white;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+        
+        .btn {
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-primary {
+            background: var(--gradient-secondary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.3);
+        }
+        
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        
+        .btn-primary:active::before {
+            width: 300px;
+            height: 300px;
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 80px 2rem;
+            background: white;
+        }
+        
+        .section-header {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 4rem;
+        }
+        
+        .section-header h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+        
+        .section-header p {
+            color: var(--gray);
+            font-size: 1.125rem;
+        }
+        
+        .features-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+        
+        .feature-card {
+            background: var(--light);
+            padding: 2rem;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-secondary);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 0;
+        }
+        
+        .feature-card:hover::before {
+            opacity: 0.05;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-secondary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .feature-icon i {
+            font-size: 1.5rem;
+            color: white;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .feature-card p {
+            color: var(--gray);
+            line-height: 1.8;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .feature-list {
+            list-style: none;
+            margin-top: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .feature-list li {
+            padding: 0.5rem 0;
+            color: var(--gray);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .feature-list li i {
+            color: var(--success);
+            font-size: 0.875rem;
+        }
+        
+        /* Process Section */
+        .process {
+            padding: 80px 2rem 100px;
+            background: var(--light);
+        }
+        
+        .process-timeline {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .process-timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, var(--primary) 0%, var(--accent) 100%);
+            transform: translateX(-50%);
+        }
+        
+        .process-step {
+            display: flex;
+            align-items: center;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+        
+        .process-step:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+        
+        .step-content {
+            flex: 1;
+            padding: 2rem;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            position: relative;
+        }
+        
+        .process-step:nth-child(odd) .step-content {
+            margin-right: 4rem;
+        }
+        
+        .process-step:nth-child(even) .step-content {
+            margin-left: 4rem;
+        }
+        
+        .step-number {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 50px;
+            background: white;
+            border: 3px solid var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1.25rem;
+            z-index: 2;
+        }
+        
+        .step-content h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+        
+        .step-content p {
+            color: var(--gray);
+        }
+        
+        /* Loading Animation */
+        .loader {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Success Message */
+        .success-message {
+            display: none;
+            background: var(--success);
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            animation: slideUp 0.5s ease;
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Floating Elements */
+        .float-element {
+            position: absolute;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .float-1 {
+            width: 100px;
+            height: 100px;
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+        
+        .float-2 {
+            width: 60px;
+            height: 60px;
+            top: 70%;
+            right: 10%;
+            animation-delay: 2s;
+        }
+        
+        .float-3 {
+            width: 80px;
+            height: 80px;
+            bottom: 10%;
+            left: 30%;
+            animation-delay: 4s;
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(180deg);
+            }
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .process-timeline::before {
+                left: 30px;
+            }
+            
+            .process-step,
+            .process-step:nth-child(even) {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .step-number {
+                left: 30px;
+            }
+            
+            .process-step:nth-child(odd) .step-content,
+            .process-step:nth-child(even) .step-content {
+                margin-left: 80px;
+                margin-right: 0;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="wrap">
-    <div class="card">
-      <header>
-        <img src="https://i.imgur.com/BS1QUKy.png" alt="Travelex Bank">
-        <h1>Dossiê de Planejamento — Solicitação</h1>
-      </header>
-
-      <div class="body">
-        <p class="lead">Preencha os campos abaixo. O dossiê será gerado e enviado para o e-mail informado.</p>
-
-        <!-- Substitua a URL do action pela URL pública do seu Webhook n8n -->
-        <form action="https://COLE_AQUI_URL_DO_SEU_WEBHOOK/webhook/dossie" method="POST" autocomplete="on" novalidate>
-          <!-- honeypot anti-bot -->
-          <div class="hp" aria-hidden="true">
-            <label>Deixe este campo em branco</label>
-            <input type="text" name="website" tabindex="-1" autocomplete="off">
-          </div>
-
-          <div>
-            <label for="cnpj_input">CNPJ do cliente</label>
-            <input id="cnpj_input" name="cnpj_input" type="text"
-                   placeholder="00.000.000/0001-00 ou 00000000000100" inputmode="numeric" required>
-            <div class="hint">Pode enviar <strong>em qualquer formato</strong> — números, com pontos, barra ou hífen — <em>nós damos um jeito!</em></div>
-          </div>
-
-          <div>
-            <label for="email_destino">E-mail para envio do dossiê</label>
-            <input id="email_destino" name="email_destino" type="email"
-                   placeholder="nome@empresa.com.br" required>
-            <div class="hint">Usaremos este e-mail apenas para entregar o dossiê solicitado.</div>
-          </div>
-
-          <div class="actions">
-            <button class="btn" type="submit" id="btnEnviar">Solicitar dossiê</button>
-          </div>
-
-          <!-- IDs úteis para rastrear no n8n (opcional) -->
-          <input type="hidden" name="source" value="github-pages">
-          <input type="hidden" name="request_id" value="">
-        </form>
-
-        <p class="disclaimer">Ao enviar, você autoriza o processamento dos dados exclusivamente para emissão do dossiê.</p>
-      </div>
-
-      <footer>
-        © Travelex Bank — Planejamento Comercial. Ambiente estático hospedado no GitHub Pages.
-      </footer>
-    </div>
-  </div>
-
-  <script>
-    // Gera um request_id simples para rastrear no n8n
-    (function(){
-      const hid = document.querySelector('input[name="request_id"]');
-      if (hid) hid.value = 'REQ-' + Math.random().toString(36).slice(2,8).toUpperCase() + '-' + Date.now();
-      // Proteção leve: se honeypot for preenchido, desabilita submit
-      const form = document.querySelector('form');
-      form.addEventListener('submit', function(e){
-        const hp = form.querySelector('input[name="website"]');
-        if (hp && hp.value.trim() !== '') {
-          e.preventDefault(); alert('Bloqueado por proteção anti-bot.'); return false;
-        }
-        document.getElementById('btnEnviar').disabled = true;
-      });
-    })();
-  </script>
+    <!-- Background Animation -->
+    <div class="bg-animation"></div>
+    
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-chart-line"></i>
+                <span>Dossiê de Planejamento</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#inicio">Início</a></li>
+                <li><a href="#recursos">Recursos</a></li>
+                <li><a href="#processo">Como Funciona</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section class="hero" id="inicio">
+        <div class="float-element float-1"></div>
+        <div class="float-element float-2"></div>
+        <div class="float-element float-3"></div>
+        
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1>Análise Empresarial <span class="gradient-text">Inteligente</span> em Minutos</h1>
+                <p>Obtenha um dossiê completo com análise de risco, reputação e oportunidades comerciais através do CNPJ.</p>
+                
+                <div class="hero-badges">
+                    <div class="badge">
+                        <i class="fas fa-check-circle"></i>
+                        <span>100% Automatizado</span>
+                    </div>
+                    <div class="badge">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Dados Oficiais</span>
+                    </div>
+                    <div class="badge">
+                        <i class="fas fa-bolt"></i>
+                        <span>Resultado em 2 min</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-card">
+                <h2 class="form-title">Solicitar Dossiê de Planejamento</h2>
+                <form id="dossierForm">
+                    <div class="form-group">
+                        <label for="cnpj">CNPJ da Empresa</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-building"></i>
+                            <input 
+                                type="text" 
+                                id="cnpj" 
+                                class="form-input" 
+                                placeholder="00.000.000/0000-00"
+                                required
+                                pattern="\d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2}"
+                            >
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Seu E-mail Corporativo</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-envelope"></i>
+                            <input 
+                                type="email" 
+                                id="email" 
+                                class="form-input" 
+                                placeholder="seu@email.com.br"
+                                required
+                            >
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">
+                        <span id="btnText">Gerar Dossiê Completo</span>
+                        <div class="loader" id="loader"></div>
+                    </button>
+                    
+                    <div class="success-message" id="successMessage">
+                        <i class="fas fa-check-circle"></i> Dossiê solicitado! Você receberá em seu e-mail em até 2 minutos.
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Features Section -->
+    <section class="features" id="recursos">
+        <div class="section-header">
+            <h2>O Que Você Recebe</h2>
+            <p>Análise completa e detalhada com informações cruciais para tomada de decisão</p>
+        </div>
+        
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-search"></i>
+                </div>
+                <h3>Dados Cadastrais Completos</h3>
+                <p>Informações oficiais da Receita Federal e bases governamentais.</p>
+                <ul class="feature-list">
+                    <li><i class="fas fa-check"></i> Razão social e nome fantasia</li>
+                    <li><i class="fas fa-check"></i> Quadro societário detalhado</li>
+                    <li><i class="fas fa-check"></i> Capital social e porte</li>
+                    <li><i class="fas fa-check"></i> CNAEs e atividades</li>
+                </ul>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>Verificação de Impedimentos</h3>
+                <p>Consulta em todas as bases de restrições governamentais.</p>
+                <ul class="feature-list">
+                    <li><i class="fas fa-check"></i> CEIS - Empresas Inidôneas</li>
+                    <li><i class="fas fa-check"></i> CNEP - Empresas Punidas</li>
+                    <li><i class="fas fa-check"></i> Certidões negativas</li>
+                    <li><i class="fas fa-check"></i> Situação fiscal</li>
+                </ul>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-chart-bar"></i>
+                </div>
+                <h3>Análise de Reputação</h3>
+                <p>Score de reputação baseado em múltiplas fontes públicas.</p>
+                <ul class="feature-list">
+                    <li><i class="fas fa-check"></i> Notícias e mídia</li>
+                    <li><i class="fas fa-check"></i> Google Reviews</li>
+                    <li><i class="fas fa-check"></i> Reclame Aqui</li>
+                    <li><i class="fas fa-check"></i> Presença digital</li>
+                </ul>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <h3>Inteligência Artificial</h3>
+                <p>Análise preditiva e recomendações baseadas em IA.</p>
+                <ul class="feature-list">
+                    <li><i class="fas fa-check"></i> Score de risco</li>
+                    <li><i class="fas fa-check"></i> Análise de sentimento</li>
+                    <li><i class="fas fa-check"></i> Recomendações comerciais</li>
+                    <li><i class="fas fa-check"></i> Próximos passos</li>
+                </ul>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-phone"></i>
+                </div>
+                <h3>Validação de Contatos</h3>
+                <p>Verificação e validação de todos os contatos disponíveis.</p>
+                <ul class="feature-list">
+                    <li><i class="fas fa-check"></i> Telefones ativos</li>
+                    <li><i class="fas fa-check"></i> Operadora identificada</li>
+                    <li><i class="fas fa-check"></i> E-mail corporativo</li>
+                    <li><i class="fas fa-check"></i> Endereço completo</li>
+                </ul>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-file-pdf"></i>
+                </div>
+                <h3>Relatório Executivo</h3>
+                <p>Documento profissional pronto para apresentação.</p>
+                <ul class="feature-list">
+                    <li><i class="fas fa-check"></i> PDF formatado</li>
+                    <li><i class="fas fa-check"></i> Gráficos e visualizações</li>
+                    <li><i class="fas fa-check"></i> Resumo executivo</li>
+                    <li><i class="fas fa-check"></i> Links de pesquisa</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Process Section -->
+    <section class="process" id="processo">
+        <div class="section-header">
+            <h2>Como Funciona</h2>
+            <p>Processo simples e automatizado em apenas 4 etapas</p>
+        </div>
+        
+        <div class="process-timeline">
+            <div class="process-step">
+                <div class="step-content">
+                    <h3>1. Informe o CNPJ</h3>
+                    <p>Digite o CNPJ da empresa que deseja analisar. Aceitamos com ou sem formatação.</p>
+                </div>
+                <div class="step-number">1</div>
+            </div>
+            
+            <div class="process-step">
+                <div class="step-content">
+                    <h3>2. Coleta Automatizada</h3>
+                    <p>Nosso sistema consulta mais de 15 bases de dados oficiais e públicas em tempo real.</p>
+                </div>
+                <div class="step-number">2</div>
+            </div>
+            
+            <div class="process-step">
+                <div class="step-content">
+                    <h3>3. Análise por IA</h3>
+                    <p>Inteligência artificial processa e analisa todos os dados, gerando insights valiosos.</p>
+                </div>
+                <div class="step-number">3</div>
+            </div>
+            
+            <div class="process-step">
+                <div class="step-content">
+                    <h3>4. Receba o Dossiê</h3>
+                    <p>Relatório completo enviado para seu e-mail em até 2 minutos, pronto para uso.</p>
+                </div>
+                <div class="step-number">4</div>
+            </div>
+        </div>
+    </section>
+    
+    <script>
+        // CNPJ Mask
+        document.getElementById('cnpj').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length <= 14) {
+                value = value.replace(/^(\d{2})(\d)/, '$1.$2');
+                value = value.replace(/^(\d{2})\.(\d{3})(\d)/, '$1.$2.$3');
+                value = value.replace(/\.(\d{3})(\d)/, '.$1/$2');
+                value = value.replace(/(\d{4})(\d)/, '$1-$2');
+            }
+            e.target.value = value;
+        });
+        
+        // Form Submit
+        document.getElementById('dossierForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const btnText = document.getElementById('btnText');
+            const loader = document.getElementById('loader');
+            const successMessage = document.getElementById('successMessage');
+            
+            // Show loading
+            btnText.style.display = 'none';
+            loader.style.display = 'block';
+            
+            // Simulate API call
+            setTimeout(() => {
+                loader.style.display = 'none';
+                successMessage.style.display = 'block';
+                
+                // Reset form
+                setTimeout(() => {
+                    btnText.style.display = 'inline';
+                    successMessage.style.display = 'none';
+                    document.getElementById('dossierForm').reset();
+                }, 5000);
+            }, 2000);
+        });
+        
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+        
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.style.background = 'rgba(255, 255, 255, 0.98)';
+                nav.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
+            } else {
+                nav.style.background = 'rgba(255, 255, 255, 0.95)';
+                nav.style.boxShadow = '0 1px 3px rgba(0,0,0,0.1)';
+            }
+        });
+        
+        // Animate elements on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.feature-card, .process-step').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'all 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
 </body>
 </html>
